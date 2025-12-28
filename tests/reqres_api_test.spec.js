@@ -1,8 +1,21 @@
+/*
+===================================================================================
+Public API Automation Flow
+
+This test automates a complete backend API workflow.
+It validates Create, Read, and Update operations of a public REST API.
+This ensures that the backend services are working correctly.
+===================================================================================
+*/
+
 import { test, expect } from '@playwright/test';
 
 test('Public API Automation Flow', async ({ request }) => {
 
-  // CREATE USER
+  /*
+  CREATE USER
+  This POST request creates a new user in the system.
+  */
   const createResponse = await request.post(
     'https://jsonplaceholder.typicode.com/users',
     {
@@ -18,7 +31,10 @@ test('Public API Automation Flow', async ({ request }) => {
   const createData = await createResponse.json();
   console.log("Created User ID:", createData.id);
 
-  // GET USER (existing)
+  /*
+  GET USER
+  This GET request fetches an existing user.
+  */
   const getResponse = await request.get(
     'https://jsonplaceholder.typicode.com/users/1'
   );
@@ -26,7 +42,10 @@ test('Public API Automation Flow', async ({ request }) => {
   const getData = await getResponse.json();
   console.log("Fetched User:", getData.name);
 
-  // UPDATE USER (existing)
+  /*
+  UPDATE USER
+  This PUT request updates an existing user's name.
+  */
   const updateResponse = await request.put(
     'https://jsonplaceholder.typicode.com/users/1',
     {
@@ -40,3 +59,4 @@ test('Public API Automation Flow', async ({ request }) => {
   const updateData = await updateResponse.json();
   console.log("Updated Name:", updateData.name);
 });
+
